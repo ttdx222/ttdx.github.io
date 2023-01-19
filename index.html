@@ -1,79 +1,42 @@
-<html>
-  <head>
-    <title></title>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+            width: auto;
+        }
+        #main {
+            display: none;
+        }
+    </style>
 
-    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script>
+        window.onload = function(){
+            var ua = window.navigator.userAgent.toLowerCase();
+            var mm = document.getElementById("main")
+            
+         if (ua.match(/micromessenger/i) == 'micromessenger') {
+           document.title = "点击右侧三个点,用浏览器打开-->"
+           mm.style.display = "block"
+           return true;
+         } else {
+              window.location.href="https://www.shadow7.top"
+               return false;
+         }
+       }
+   </script>
+</head>
+<body style="background-color: #110f23;"> 
+    <span style="color: #110f23;">Loading</span>
 
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <button class="add btn btn-default">添加</button>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-          </div>
-          <div class="modal-body">
-            用户名：<input type="text" class="form-control username" name=""><br />
-            密码：<input type="text" class="form-control password" name=""><br />
-            邮箱: <input type="email" class="form-control email" name=""><br />
-            电话: <input type="text" class="form-control tel" name=""><br />
-            role: <input type="rol" class="form-control rol" name=""><br>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary do_add">添加</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+        <center><img src="./img/wechat-tip.webp" alt=""></center>
+
+</body>
+
 </html>
-<script>
-  //打开模态框
-  $('.add').click(function(){
-    $('#myModal').modal('show')
-  })
-
-  $('.do_add').click(function(){
-  var username = $('.username').val();
-  //判断用户名是否为空
-  if(username == ''){
-    alert('用户名为空');
-    return false;
-  }
-  //发送ajax
-  $.ajax({
-    url:'https://www.liulongbin.top:8888/api/private/v1/users',
-    type:'post',
-    headers:{
-      Authorization:'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE2MzExNjg3MTMsImV4cCI6MTYzMTI1NTExM30.3pXI-uzd8oc9PP2cVnzRbKVcfrsEc36APzDUjhXl1CI'
-    },
-    //设置要添加的数据
-    data:{
-      'username':$('.username').val(),
-      'password':$('.password').val(),
-      'email':$('.email').val(),
-      'mobile':$('.tel').val(),
-      'role_id':1
-    },
-    success:function(msg){
-      //判断状态码是否添加成功
-      console.log(msg)
-      if(msg.meta.status == 201){
-        alert('添加成功')
-
-
-      }else{
-        alert('添加失败')
-      }
-    }
-  })
-})
-</script>
